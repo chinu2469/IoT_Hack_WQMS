@@ -13,21 +13,18 @@ namespace QualitySensorData.Controllers
         {
             // creting private instance of repository to acces its method in this class only
             private readonly QualitySensorDbContext _dataset;
-            //private readonly ILogger<AQMSapiDbContext> _logger;             //logger instance to get all logger method
             public QSData(QualitySensorDbContext dataset) //, ILogger<AQMSapiDbContext> logger
             {
                 this._dataset = dataset;                                    //assigning instance
 
-                //this._logger = logger;
             }
 
             [HttpGet]
-            //[Authorize]
+           
             public ActionResult Getalldata()
             {
                 try
                 {
-                    //_logger.LogInformation("-------********************-------getting all data-------****************-------");
                     IEnumerable<QualitySensorDataMdl>? data = _dataset.QualitySensorDataTable.ToList();        //use getall method to retrive data from database
                     if (data.Count() == 0)
                     {
@@ -42,6 +39,24 @@ namespace QualitySensorData.Controllers
                 }
             }
 
+        [HttpGet("day")]
+        public ActionResult DaysQuality(DateTime day) 
+        {
+            try 
+            { 
+                IEnumerable<QualitySensorDataMdl>? data= _dataset.QualitySensorDataTable.Where(x => x.date == day).ToList();
+                if (data.Count() == 0)
+                {
+                    throw new Exception("data not found");
+                }
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogInformation(ex.Message);
+                return StatusCode(StatusCodes.Status404NotFound);                       //returns badrequest
+            }
+        }
         }
 
 }

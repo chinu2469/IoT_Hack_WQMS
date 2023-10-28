@@ -10,9 +10,12 @@ namespace QualitySensorData.Data
         {
 
         }
-
+        
         public DbSet<QualitySensorDataMdl> QualitySensorDataTable { get; set; }
-        //public DbSet<Users> Users { get; set; }
-        //public DbSet<DeviceErrors> deviceErrors { get; set; }
+        public DbSet<ConsumptionStat> ConsumptionData { get; set; }
+        public DbSet<FloorConsumptionStat> floorWiseConsumptionData { get; set; }
+
+        public DbSet<MainTankStat> MainTankdata { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

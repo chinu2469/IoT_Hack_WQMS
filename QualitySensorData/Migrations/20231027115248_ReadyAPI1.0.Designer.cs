@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QualitySensorData.Data;
 
@@ -11,9 +12,11 @@ using QualitySensorData.Data;
 namespace QualitySensorData.Migrations
 {
     [DbContext(typeof(QualitySensorDbContext))]
-    partial class QualitySensorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231027115248_ReadyAPI1.0")]
+    partial class ReadyAPI10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace QualitySensorData.Migrations
                     b.ToTable("ConsumptionData");
                 });
 
-            modelBuilder.Entity("QualitySensorData.Model.FloorConsumptionStat", b =>
+            modelBuilder.Entity("QualitySensorData.Model.FloorConsumption", b =>
                 {
                     b.Property<int>("floor")
                         .ValueGeneratedOnAdd()
@@ -70,28 +73,6 @@ namespace QualitySensorData.Migrations
                     b.ToTable("floorWiseConsumptionData");
                 });
 
-            modelBuilder.Entity("QualitySensorData.Model.MainTankStat", b =>
-                {
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("consumptionTotal")
-                        .HasColumnType("real");
-
-                    b.Property<int>("refillCount")
-                        .HasColumnType("int");
-
-                    b.Property<float>("totalSensorCount")
-                        .HasColumnType("real");
-
-                    b.Property<float>("waterLevel")
-                        .HasColumnType("real");
-
-                    b.HasKey("date");
-
-                    b.ToTable("MainTankdata");
-                });
-
             modelBuilder.Entity("QualitySensorData.Model.QualitySensorDataMdl", b =>
                 {
                     b.Property<long>("ID")
@@ -106,11 +87,11 @@ namespace QualitySensorData.Migrations
                     b.Property<float>("clorin")
                         .HasColumnType("real");
 
-                    b.Property<float>("co2")
-                        .HasColumnType("real");
+                    b.Property<int>("co2")
+                        .HasColumnType("int");
 
-                    b.Property<float>("conductivity")
-                        .HasColumnType("real");
+                    b.Property<int>("conductivity")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime2");
@@ -118,65 +99,21 @@ namespace QualitySensorData.Migrations
                     b.Property<int>("floor")
                         .HasColumnType("int");
 
-                    b.Property<float>("humidity")
-                        .HasColumnType("real");
+                    b.Property<int>("humidity")
+                        .HasColumnType("int");
 
-                    b.Property<float>("pH")
-                        .HasColumnType("real");
+                    b.Property<int>("pH")
+                        .HasColumnType("int");
 
-                    b.Property<float>("temp")
-                        .HasColumnType("real");
+                    b.Property<int>("temp")
+                        .HasColumnType("int");
 
-                    b.Property<float>("turbidity")
-                        .HasColumnType("real");
+                    b.Property<int>("turbidity")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.ToTable("QualitySensorDataTable");
-                });
-
-            modelBuilder.Entity("QualitySensorData.Model.User", b =>
-                {
-                    b.Property<int>("empId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("empId"));
-
-                    b.Property<string>("department")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("floor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("mobileNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("rewardPoint")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("empId");
-
-                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

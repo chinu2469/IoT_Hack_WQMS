@@ -11,12 +11,12 @@ namespace QualitySensorData.Model
         //public TimeOnly time { get; set; }
         public int floor { get; set; }
         public int SensorID { get; set; }
-        public int pH { get; set; }
-        public int turbidity { get; set; }
-        public int conductivity { get; set; }
-        public int co2 { get; set; }
-        public int humidity { get; set; }
-        public int temp { get; set; }
+        public float pH { get; set; }
+        public float turbidity { get; set; }
+        public float conductivity { get; set; }
+        public float co2 { get; set; }
+        public float humidity { get; set; }
+        public float temp { get; set; }
         public float clorin { get; set; }
     }
 }

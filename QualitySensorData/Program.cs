@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using QualitySensorData.Data;
+using Microsoft.Extensions.DependencyInjection;
+using QualitySensorData.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<QualitySensorDbContext>(Options => Options.UseSqlServer(
-    builder.Configuration.GetConnectionString("QSDapiConString")
+    builder.Configuration.GetConnectionString("QualitySensorString"),
+    sqlServerOptionsAction: sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5, // Number of retries
+            maxRetryDelay: TimeSpan.FromSeconds(30), // Delay between retries
+            errorNumbersToAdd: null); // Error numbers to add to retries
+    }
     ));
 
 var app = builder.Build();
