@@ -27,6 +27,16 @@ builder.Services.AddDbContext<QualitySensorDbContext>(Options => Options.UseSqlS
             errorNumbersToAdd: null); // Error numbers to add to retries
     }
     ));
+//cors policy 
+//configure for localhost
+var devCorsPolicy = "devCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(devCorsPolicy, builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -35,6 +45,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(devCorsPolicy);
 }
 
 app.UseHttpsRedirection();

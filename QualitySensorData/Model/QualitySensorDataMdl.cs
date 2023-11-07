@@ -10,7 +10,7 @@ namespace QualitySensorData.Model
         public DateTime date { get; set; }
         //public TimeOnly time { get; set; }
         public int floor { get; set; }
-        public int SensorID { get; set; }
+        public string SensorID { get; set; }
         public float pH { get; set; }
         public float turbidity { get; set; }
         public float conductivity { get; set; }
@@ -18,6 +18,7 @@ namespace QualitySensorData.Model
         public float humidity { get; set; }
         public float temp { get; set; }
         public float clorin { get; set; }
+        public int wqi { get; set; }
     }
 }
 

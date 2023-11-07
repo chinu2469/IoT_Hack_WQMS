@@ -12,8 +12,8 @@ using QualitySensorData.Data;
 namespace QualitySensorData.Migrations
 {
     [DbContext(typeof(QualitySensorDbContext))]
-    [Migration("20231027130408_Datatypeupdate")]
-    partial class Datatypeupdate
+    [Migration("20231103191730_data-type-update")]
+    partial class datatypeupdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,8 @@ namespace QualitySensorData.Migrations
 
             modelBuilder.Entity("QualitySensorData.Model.ConsumptionStat", b =>
                 {
-                    b.Property<long>("sensorid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("sensorid"));
+                    b.Property<string>("sensorid")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("consuption")
                         .HasColumnType("int");
@@ -43,7 +40,6 @@ namespace QualitySensorData.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("utilityName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("sensorid");
@@ -51,7 +47,7 @@ namespace QualitySensorData.Migrations
                     b.ToTable("ConsumptionData");
                 });
 
-            modelBuilder.Entity("QualitySensorData.Model.FloorConsumption", b =>
+            modelBuilder.Entity("QualitySensorData.Model.FloorConsumptionStat", b =>
                 {
                     b.Property<int>("floor")
                         .ValueGeneratedOnAdd()
@@ -73,6 +69,28 @@ namespace QualitySensorData.Migrations
                     b.ToTable("floorWiseConsumptionData");
                 });
 
+            modelBuilder.Entity("QualitySensorData.Model.MainTankStat", b =>
+                {
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("consumptionTotal")
+                        .HasColumnType("real");
+
+                    b.Property<int>("refillCount")
+                        .HasColumnType("int");
+
+                    b.Property<float>("totalSensorCount")
+                        .HasColumnType("real");
+
+                    b.Property<float>("waterLevel")
+                        .HasColumnType("real");
+
+                    b.HasKey("date");
+
+                    b.ToTable("MainTankdata");
+                });
+
             modelBuilder.Entity("QualitySensorData.Model.QualitySensorDataMdl", b =>
                 {
                     b.Property<long>("ID")
@@ -81,8 +99,9 @@ namespace QualitySensorData.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"));
 
-                    b.Property<int>("SensorID")
-                        .HasColumnType("int");
+                    b.Property<string>("SensorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("clorin")
                         .HasColumnType("real");
@@ -114,6 +133,43 @@ namespace QualitySensorData.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("QualitySensorDataTable");
+                });
+
+            modelBuilder.Entity("QualitySensorData.Model.User", b =>
+                {
+                    b.Property<int>("empId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("empId"));
+
+                    b.Property<string>("department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("floor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mobileNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("rewardPoint")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("empId");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -24,11 +24,8 @@ namespace QualitySensorData.Migrations
 
             modelBuilder.Entity("QualitySensorData.Model.ConsumptionStat", b =>
                 {
-                    b.Property<long>("sensorid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("sensorid"));
+                    b.Property<string>("sensorid")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("consuption")
                         .HasColumnType("int");
@@ -40,7 +37,6 @@ namespace QualitySensorData.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("utilityName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("sensorid");
@@ -100,8 +96,9 @@ namespace QualitySensorData.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"));
 
-                    b.Property<int>("SensorID")
-                        .HasColumnType("int");
+                    b.Property<string>("SensorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("clorin")
                         .HasColumnType("real");
@@ -130,6 +127,9 @@ namespace QualitySensorData.Migrations
                     b.Property<float>("turbidity")
                         .HasColumnType("real");
 
+                    b.Property<int>("wqi")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.ToTable("QualitySensorDataTable");
@@ -144,34 +144,27 @@ namespace QualitySensorData.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("empId"));
 
                     b.Property<string>("department")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("floor")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("mobileNo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("rewardPoint")
                         .HasColumnType("bigint");
 
                     b.Property<string>("role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("empId");

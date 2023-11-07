@@ -6,7 +6,7 @@ namespace QualitySensorData.Model
     {
         [Key]
         [Required]
-        public long sensorid { get; set; }
+        public string? sensorid { get; set; }
         public DateTime date { get; set; }
         //public TimeOnly time { get; set; }
         public int sfloor { get; set; }
